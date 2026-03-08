@@ -1,13 +1,4 @@
-// const mysql = require("mysql2")
 
-// const db = mysql.createConnection({
-//   host: "localhost",
-//   user: "root",
-//   password: "jaga@2005",
-//   database: "moneytracker"
-// })
-
-// module.exports = db
 
 require("dotenv").config()
 const mysql = require("mysql2")
