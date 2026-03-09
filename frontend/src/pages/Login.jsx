@@ -26,7 +26,7 @@ setLoading(true)
 try{
 
 const res = await axios.post(
-"http://payment-tracker-backend-ns4x.onrender.com/api/auth/login",
+"https://payment-tracker-backend-ns4x.onrender.com/api/auth/login",
 {email,password}
 )
 
