@@ -23,7 +23,7 @@ setLoading(true)
 try {
 
 await axios.post(
-"http://localhost:5000/api/auth/register",
+"https://payment-tracker-backend-ns4x.onrender.com/api/auth/register",
 {
 name,
 email,
