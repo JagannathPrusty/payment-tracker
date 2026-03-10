@@ -460,7 +460,7 @@ boxShadow:"0 5px 15px rgba(0,0,0,0.05)"
 },
 
 dashboard:{
-background:"#111827",
+background:"#5269ec",
 color:"white",
 padding:"30px",
 borderRadius:"14px",
