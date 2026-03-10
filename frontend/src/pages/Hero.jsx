@@ -127,12 +127,12 @@ padding:70px 20px !important;
 
 <div
 className={`nav-links ${menuOpen ? "show" : ""}`}
-style={styles.navLinks}
+
 >
 
-<a href="#features">Features</a>
+<a href="#features">Features</a>&nbsp; &nbsp;&nbsp; &nbsp;
 
-<a href="#how">How It Works</a>
+<a href="#how">How It Works</a>&nbsp; &nbsp;&nbsp; &nbsp;
 
 <button
 className="login-btn"
