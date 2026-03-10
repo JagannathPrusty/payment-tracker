@@ -34,7 +34,7 @@ phone
 
 alert("User registered successfully")
 
-navigate("/login")
+window.location.href = "/login"
 
 } catch (err) {
 
