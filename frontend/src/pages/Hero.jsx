@@ -1,8 +1,10 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
+import { useState } from "react"
 
 function LandingPage() {
 
 const navigate = useNavigate()
+const [menuOpen,setMenuOpen] = useState(false)
 
 return (
 
@@ -43,14 +45,44 @@ to{opacity:1;transform:translateY(0)}
 
 .login-btn:hover{background:#4338ca}
 
+/* HAMBURGER */
+
+.hamburger{
+display:none;
+flex-direction:column;
+cursor:pointer;
+gap:4px;
+}
+
+.hamburger div{
+width:25px;
+height:3px;
+background:#111;
+}
+
 /* RESPONSIVE */
 
 @media(max-width:900px){
 
-nav{
+.nav-links{
+display:none;
 flex-direction:column;
 gap:15px;
-padding:16px 20px !important;
+background:white;
+position:absolute;
+top:70px;
+right:20px;
+padding:20px;
+border-radius:10px;
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+.nav-links.show{
+display:flex;
+}
+
+.hamburger{
+display:flex;
 }
 
 .hero-title{
@@ -93,7 +125,10 @@ padding:70px 20px !important;
 
 <h2 style={styles.logo}>PaymentTracker</h2>
 
-<div style={styles.navLinks}>
+<div
+className={`nav-links ${menuOpen ? "show" : ""}`}
+style={styles.navLinks}
+>
 
 <a href="#features">Features</a>
 
@@ -107,6 +142,15 @@ onClick={()=>navigate("/login")}
 Login
 </button>
 
+</div>
+
+<div
+className="hamburger"
+onClick={()=>setMenuOpen(!menuOpen)}
+>
+<div></div>
+<div></div>
+<div></div>
 </div>
 
 </nav>
@@ -216,7 +260,7 @@ Get Started →
 </section>
 
 
-{/* DASHBOARD */}
+{/* DASHBOARD PREVIEW */}
 
 <section style={styles.section}>
 
