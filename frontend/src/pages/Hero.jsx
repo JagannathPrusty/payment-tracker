@@ -1,593 +1,456 @@
 import { useNavigate } from "react-router-dom";
 
 function LandingPage() {
-  const navigate = useNavigate();
 
-  return (
-    <div style={styles.container}>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Outfit:wght@300;400;500;600&display=swap');
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
+const navigate = useNavigate()
 
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(28px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes floatCard {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
-        }
-        @keyframes shimmer {
-          0% { background-position: -400px 0; }
-          100% { background-position: 400px 0; }
-        }
+return (
 
-        .hero-title { animation: fadeUp 0.9s ease both; }
-        .hero-sub { animation: fadeUp 0.9s 0.15s ease both; }
-        .hero-btns { animation: fadeUp 0.9s 0.3s ease both; }
-        .dashboard-float { animation: floatCard 5s ease-in-out infinite; }
+<div style={styles.container}>
 
-        nav a { color: #334155; font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 500; text-decoration: none; transition: color 0.2s; }
-        nav a:hover { color: #0f172a; }
+<style>{`
 
-        .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .card-hover:hover { transform: translateY(-6px); box-shadow: 0 24px 48px rgba(15,23,42,0.12) !important; }
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Outfit:wght@300;400;500;600&display=swap');
 
-        .step-hover { transition: border-color 0.3s ease, background 0.3s ease; }
-        .step-hover:hover { border-color: #6366f1 !important; background: #faf9ff !important; }
+*{box-sizing:border-box;margin:0;padding:0}
 
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(99,102,241,0.4) !important; }
-        .btn-primary { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-        .btn-secondary:hover { background: rgba(255,255,255,0.18) !important; }
-        .btn-secondary { transition: background 0.2s ease; }
-        .login-btn:hover { background: #4338ca !important; }
-        .login-btn { transition: background 0.2s ease; }
+html{scroll-behavior:smooth}
 
-        footer a { color: #94a3b8; font-family: 'Outfit', sans-serif; font-size: 13px; text-decoration: none; transition: color 0.2s; }
-        footer a:hover { color: #e2e8f0; }
-      `}</style>
+/* Animations */
 
-      {/* NAVBAR */}
-      <nav style={styles.nav}>
-        <h2 style={styles.logo}>PaymentTracker</h2>
-        <div style={styles.navLinks}>
-          <a href="#features">Features</a>
-          <a href="#how">How It Works</a>
-          
-          <button className="login-btn" style={styles.loginBtn} onClick={() => navigate("/login")}>
-            Login
-          </button>
-        </div>
-      </nav>
-
-      {/* HERO */}
-      <section style={styles.hero}>
-        <div style={styles.heroNoise} />
-        <div style={styles.heroOrb1} />
-        <div style={styles.heroOrb2} />
-        <h1 className="hero-title" style={styles.title}>
-          Track Money Between<br />
-          <span style={styles.titleAccent}>Friends</span>
-        </h1>
-        <p className="hero-sub" style={styles.subtitle}>
-          Never forget who owes you money again. Manage payments,
-          debts and reminders with one simple dashboard.
-        </p>
-        <div className="hero-btns" style={styles.heroButtons}>
-          <button className="btn-primary" style={styles.primaryBtn} onClick={() => navigate("/register")}>
-            Create Free Account
-          </button>
-          <button className="btn-secondary" style={styles.secondaryBtn} onClick={() => navigate("/login")}>
-            Get Started →
-          </button>
-        </div>
-      </section>
-
-      {/* FEATURES */}
-      <section id="features" style={styles.section}>
-        <div style={styles.labelTag}>FEATURES</div>
-        <h2 style={styles.sectionTitle}>Everything you need</h2>
-        <div style={styles.grid}>
-          {[
-            { icon: "◈", title: "Track Payments", desc: "Record money you give or receive from friends, family, or clients." },
-            { icon: "◉", title: "Due Date Reminders", desc: "Set due dates and get reminders for pending payments." },
-            { icon: "◐", title: "Secure Accounts", desc: "Your data is private with secure login and protected records." },
-            { icon: "◑", title: "Clean Dashboard", desc: "View all financial activity in a simple and easy dashboard." },
-          ].map((f, i) => (
-            <div key={i} className="card-hover" style={styles.card}>
-              <div style={styles.cardIcon}>{f.icon}</div>
-              <h3 style={styles.cardTitle}>{f.title}</h3>
-              <p style={styles.cardDesc}>{f.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* HOW IT WORKS */}
-      <section id="how" style={styles.sectionAlt}>
-        <div style={styles.labelTag}>PROCESS</div>
-        <h2 style={styles.sectionTitle}>How It Works</h2>
-        <div style={styles.steps}>
-          {[
-            { num: "01", title: "Add Contact", desc: "Add a friend, client, or family member." },
-            { num: "02", title: "Log Payment", desc: "Record who paid and how much." },
-            { num: "03", title: "Set Due Date", desc: "Track deadlines for repayments." },
-            { num: "04", title: "Settle Up", desc: "Mark payment as completed." },
-          ].map((s, i) => (
-            <div key={i} className="step-hover" style={styles.stepCard}>
-              <div style={styles.stepNum}>{s.num}</div>
-              <h3 style={styles.stepTitle}>{s.title}</h3>
-              <p style={styles.stepDesc}>{s.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* DASHBOARD */}
-      <section style={styles.section}>
-        <div style={styles.labelTag}>PREVIEW</div>
-        <h2 style={styles.sectionTitle}>Simple Dashboard</h2>
-        <div className="dashboard-float" style={styles.dashboard}>
-          <div style={styles.dashHeader}>
-            <span style={styles.dashDot} />
-            <span style={{ ...styles.dashDot, background: "#fbbf24" }} />
-            <span style={{ ...styles.dashDot, background: "#34d399" }} />
-            <span style={styles.dashLabel}>Payment Overview</span>
-          </div>
-          <div style={styles.transaction}>
-            <div style={styles.txLeft}>
-              <div style={styles.txAvatar}>A</div>
-              <span style={styles.txName}>Alex</span>
-            </div>
-            <span style={styles.positive}>+$200</span>
-          </div>
-          <div style={styles.transaction}>
-            <div style={styles.txLeft}>
-              <div style={{ ...styles.txAvatar, background: "rgba(248,113,113,0.15)", color: "#f87171" }}>S</div>
-              <span style={styles.txName}>Sam</span>
-            </div>
-            <span style={styles.negative}>-$50</span>
-          </div>
-          <div style={styles.transaction}>
-            <div style={styles.txLeft}>
-              <div style={styles.txAvatar}>J</div>
-              <span style={styles.txName}>Jordan</span>
-            </div>
-            <span style={styles.positive}>+$120</span>
-          </div>
-          <div style={styles.dashDivider} />
-          <div style={styles.balanceRow}>
-            <span style={styles.balanceLabel}>Net Balance</span>
-            <h3 style={styles.balance}>+$270.00</h3>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section style={styles.cta}>
-        <div style={styles.heroNoise} />
-        <div style={styles.heroOrb1} />
-        <h2 style={styles.ctaTitle}>Start Tracking Your<br />Payments Today</h2>
-        <button className="btn-primary" style={{ ...styles.primaryBtn, marginTop: "32px" }} onClick={() => navigate("/register")}>
-          Create Free Account
-        </button>
-      </section>
-
-      {/* FOOTER */}
-      <footer style={styles.footer}>
-        <p style={styles.footerCopy}>© 2026 PaymentTracker</p>
-        <div style={styles.footerLinks}>
-          <a href="#">Privacy</a>
-          <a href="#">Terms</a>
-          <a href="#">Contact</a>
-        </div>
-      </footer>
-    </div>
-  );
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(30px)}
+to{opacity:1;transform:translateY(0)}
 }
 
-const styles = {
-  container: {
-    fontFamily: "'Outfit', sans-serif",
-    background: "#f8faff",
-    color: "#0f172a",
-  },
+@keyframes floatCard{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-10px)}
+}
 
-  nav: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "18px 64px",
-    background: "rgba(255,255,255,0.85)",
-    backdropFilter: "blur(16px)",
-    boxShadow: "0 1px 0 rgba(15,23,42,0.06)",
-    position: "sticky",
-    top: 0,
-    zIndex: 10,
-  },
+.hero-title{animation:fadeUp .9s ease both}
+.hero-sub{animation:fadeUp .9s .15s ease both}
+.hero-btns{animation:fadeUp .9s .3s ease both}
+.dashboard-float{animation:floatCard 5s ease-in-out infinite}
 
-  logo: {
-    fontFamily: "'Playfair Display', serif",
-    fontSize: "22px",
-    fontWeight: "700",
-    color: "#4f46e5",
-    letterSpacing: "-0.5px",
-  },
+/* Hover */
 
-  navLinks: {
-    display: "flex",
-    gap: "32px",
-    alignItems: "center",
-  },
+.card-hover{transition:all .3s ease}
+.card-hover:hover{transform:translateY(-6px);box-shadow:0 25px 45px rgba(0,0,0,.1)}
 
-  loginBtn: {
-    padding: "9px 22px",
-    border: "none",
-    background: "#4f46e5",
-    color: "white",
-    borderRadius: "8px",
-    cursor: "pointer",
-    fontFamily: "'Outfit', sans-serif",
-    fontWeight: "600",
-    fontSize: "14px",
-  },
+.btn-primary{transition:all .25s}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(79,70,229,.35)}
 
-  hero: {
-    padding: "140px 40px 160px",
-    textAlign: "center",
-    background: "linear-gradient(145deg, #312e81 0%, #4f46e5 45%, #7c3aed 100%)",
-    color: "white",
-    position: "relative",
-    overflow: "hidden",
-  },
+.login-btn:hover{background:#4338ca}
 
-  heroNoise: {
-    position: "absolute",
-    inset: 0,
-    backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E\")",
-    pointerEvents: "none",
-  },
+/* RESPONSIVE */
 
-  heroOrb1: {
-    position: "absolute",
-    top: "-80px",
-    right: "10%",
-    width: "400px",
-    height: "400px",
-    background: "radial-gradient(circle, rgba(167,139,250,0.35) 0%, transparent 70%)",
-    borderRadius: "50%",
-    pointerEvents: "none",
-  },
+@media(max-width:900px){
 
-  heroOrb2: {
-    position: "absolute",
-    bottom: "-100px",
-    left: "5%",
-    width: "350px",
-    height: "350px",
-    background: "radial-gradient(circle, rgba(99,102,241,0.3) 0%, transparent 70%)",
-    borderRadius: "50%",
-    pointerEvents: "none",
-  },
+nav{
+flex-direction:column;
+gap:15px;
+padding:16px 20px !important;
+}
 
-  title: {
-    fontFamily: "'Playfair Display', serif",
-    fontSize: "clamp(44px, 6vw, 76px)",
-    fontWeight: "900",
-    lineHeight: "1.08",
-    letterSpacing: "-1.5px",
-    marginBottom: "24px",
-    position: "relative",
-  },
+.hero-title{
+font-size:40px !important;
+}
 
-  titleAccent: {
-    fontStyle: "italic",
-    color: "#c7d2fe",
-  },
+.hero-btns{
+flex-direction:column;
+align-items:center;
+}
 
-  subtitle: {
-    fontSize: "18px",
-    maxWidth: "580px",
-    margin: "0 auto 40px",
-    lineHeight: "1.75",
-    color: "rgba(255,255,255,0.78)",
-    fontWeight: "300",
-    position: "relative",
-  },
+.btn-primary,.btn-secondary{
+width:220px;
+}
 
-  heroButtons: {
-    display: "flex",
-    justifyContent: "center",
-    gap: "16px",
-    position: "relative",
-  },
+}
 
-  primaryBtn: {
-    padding: "14px 32px",
-    border: "none",
-    background: "#ffffff",
-    color: "#4f46e5",
-    borderRadius: "10px",
-    fontWeight: "600",
-    fontFamily: "'Outfit', sans-serif",
-    fontSize: "15px",
-    cursor: "pointer",
-    boxShadow: "0 6px 24px rgba(79,70,229,0.3)",
-  },
+@media(max-width:600px){
 
-  secondaryBtn: {
-    padding: "14px 32px",
-    border: "2px solid rgba(255,255,255,0.4)",
-    background: "rgba(255,255,255,0.08)",
-    color: "white",
-    borderRadius: "10px",
-    cursor: "pointer",
-    fontFamily: "'Outfit', sans-serif",
-    fontWeight: "500",
-    fontSize: "15px",
-  },
+.hero-title{
+font-size:32px !important;
+}
 
-  section: {
-    padding: "100px 40px",
-    textAlign: "center",
-    maxWidth: "1100px",
-    margin: "0 auto",
-  },
+.hero-sub{
+font-size:16px !important;
+}
 
-  sectionAlt: {
-    padding: "100px 40px",
-    background: "linear-gradient(180deg, #eef2ff 0%, #f5f3ff 100%)",
-    textAlign: "center",
-  },
+section{
+padding:70px 20px !important;
+}
 
-  labelTag: {
-    display: "inline-block",
-    fontFamily: "'Outfit', monospace",
-    fontSize: "11px",
-    fontWeight: "600",
-    letterSpacing: "3px",
-    color: "#6366f1",
-    background: "#eef2ff",
-    border: "1px solid #c7d2fe",
-    borderRadius: "100px",
-    padding: "5px 14px",
-    marginBottom: "18px",
-  },
+}
 
-  sectionTitle: {
-    fontFamily: "'Playfair Display', serif",
-    fontSize: "clamp(32px, 4vw, 48px)",
-    fontWeight: "700",
-    letterSpacing: "-1px",
-    marginBottom: "52px",
-    color: "#0f172a",
-  },
+`}</style>
 
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-    gap: "24px",
-    maxWidth: "1000px",
-    margin: "0 auto",
-  },
 
-  card: {
-    background: "white",
-    padding: "36px 28px",
-    borderRadius: "16px",
-    boxShadow: "0 4px 20px rgba(15,23,42,0.06)",
-    textAlign: "left",
-    border: "1px solid rgba(99,102,241,0.08)",
-  },
+{/* NAVBAR */}
 
-  cardIcon: {
-    fontSize: "24px",
-    color: "#6366f1",
-    marginBottom: "16px",
-  },
+<nav style={styles.nav}>
 
-  cardTitle: {
-    fontFamily: "'Playfair Display', serif",
-    fontSize: "18px",
-    fontWeight: "700",
-    marginBottom: "10px",
-    color: "#0f172a",
-  },
+<h2 style={styles.logo}>PaymentTracker</h2>
 
-  cardDesc: {
-    fontSize: "14px",
-    color: "#64748b",
-    lineHeight: "1.75",
-    fontWeight: "400",
-  },
+<div style={styles.navLinks}>
 
-  steps: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-    gap: "20px",
-    maxWidth: "960px",
-    margin: "0 auto",
-  },
+<a href="#features">Features</a>
 
-  stepCard: {
-    background: "white",
-    padding: "32px 24px",
-    borderRadius: "14px",
-    boxShadow: "0 4px 16px rgba(15,23,42,0.05)",
-    textAlign: "left",
-    border: "2px solid #e0e7ff",
-  },
+<a href="#how">How It Works</a>
 
-  stepNum: {
-    fontFamily: "'Outfit', monospace",
-    fontSize: "13px",
-    fontWeight: "600",
-    color: "#a5b4fc",
-    letterSpacing: "2px",
-    marginBottom: "14px",
-  },
+<button
+className="login-btn"
+style={styles.loginBtn}
+onClick={()=>navigate("/login")}
+>
+Login
+</button>
 
-  stepTitle: {
-    fontFamily: "'Playfair Display', serif",
-    fontSize: "17px",
-    fontWeight: "700",
-    marginBottom: "8px",
-    color: "#0f172a",
-  },
+</div>
 
-  stepDesc: {
-    fontSize: "14px",
-    color: "#64748b",
-    lineHeight: "1.7",
-  },
+</nav>
 
-  dashboard: {
-    background: "linear-gradient(145deg, #1e1b4b, #1e293b)",
-    color: "white",
-    padding: "28px",
-    borderRadius: "20px",
-    maxWidth: "400px",
-    margin: "0 auto",
-    boxShadow: "0 30px 80px rgba(79,70,229,0.25), 0 0 0 1px rgba(99,102,241,0.15)",
-  },
 
-  dashHeader: {
-    display: "flex",
-    alignItems: "center",
-    gap: "6px",
-    marginBottom: "24px",
-  },
+{/* HERO */}
 
-  dashDot: {
-    width: "10px",
-    height: "10px",
-    borderRadius: "50%",
-    background: "#f87171",
-  },
+<section style={styles.hero}>
 
-  dashLabel: {
-    fontFamily: "'Outfit', monospace",
-    fontSize: "11px",
-    color: "#64748b",
-    letterSpacing: "1.5px",
-    marginLeft: "8px",
-  },
+<h1 className="hero-title" style={styles.title}>
+Track Money Between <br/>
+<span style={styles.titleAccent}>Friends</span>
+</h1>
 
-  transaction: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: "14px",
-    padding: "12px 14px",
-    background: "rgba(255,255,255,0.04)",
-    borderRadius: "10px",
-    border: "1px solid rgba(255,255,255,0.06)",
-  },
+<p className="hero-sub" style={styles.subtitle}>
+Never forget who owes you money again.
+Manage payments, debts and reminders
+with one simple dashboard.
+</p>
 
-  txLeft: {
-    display: "flex",
-    alignItems: "center",
-    gap: "12px",
-  },
+<div className="hero-btns" style={styles.heroButtons}>
 
-  txAvatar: {
-    width: "34px",
-    height: "34px",
-    borderRadius: "50%",
-    background: "rgba(99,102,241,0.2)",
-    color: "#a5b4fc",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontWeight: "700",
-    fontSize: "14px",
-  },
+<button
+className="btn-primary"
+style={styles.primaryBtn}
+onClick={()=>navigate("/register")}
+>
+Create Free Account
+</button>
 
-  txName: {
-    fontSize: "15px",
-    fontWeight: "500",
-    color: "#e2e8f0",
-  },
+<button
+className="btn-secondary"
+style={styles.secondaryBtn}
+onClick={()=>navigate("/login")}
+>
+Get Started →
+</button>
 
-  positive: {
-    color: "#34d399",
-    fontWeight: "600",
-    fontFamily: "'Outfit', monospace",
-    fontSize: "16px",
-  },
+</div>
 
-  negative: {
-    color: "#f87171",
-    fontWeight: "600",
-    fontFamily: "'Outfit', monospace",
-    fontSize: "16px",
-  },
+</section>
 
-  dashDivider: {
-    height: "1px",
-    background: "rgba(255,255,255,0.08)",
-    margin: "16px 0",
-  },
 
-  balanceRow: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
+{/* FEATURES */}
 
-  balanceLabel: {
-    fontSize: "13px",
-    color: "#64748b",
-    fontFamily: "'Outfit', monospace",
-    letterSpacing: "1px",
-  },
+<section id="features" style={styles.section}>
 
-  balance: {
-    fontFamily: "'Outfit', monospace",
-    fontSize: "22px",
-    fontWeight: "600",
-    color: "#34d399",
-    textShadow: "0 0 20px rgba(52,211,153,0.4)",
-  },
+<h2 style={styles.sectionTitle}>Features</h2>
 
-  cta: {
-    padding: "120px 40px",
-    background: "linear-gradient(145deg, #312e81 0%, #4f46e5 45%, #7c3aed 100%)",
-    color: "white",
-    textAlign: "center",
-    position: "relative",
-    overflow: "hidden",
-  },
+<div style={styles.grid}>
 
-  ctaTitle: {
-    fontFamily: "'Playfair Display', serif",
-    fontSize: "clamp(36px, 5vw, 60px)",
-    fontWeight: "900",
-    lineHeight: "1.1",
-    letterSpacing: "-1.5px",
-    position: "relative",
-  },
+<div className="card-hover" style={styles.card}>
+<h3>Track Payments</h3>
+<p>Record money you give or receive.</p>
+</div>
 
-  footer: {
-    padding: "36px 40px",
-    textAlign: "center",
-    background: "#0f172a",
-    color: "#475569",
-  },
+<div className="card-hover" style={styles.card}>
+<h3>Due Date Reminders</h3>
+<p>Get reminders for pending payments.</p>
+</div>
 
-  footerCopy: {
-    fontFamily: "'Outfit', monospace",
-    fontSize: "13px",
-    color: "#334155",
-    marginBottom: "12px",
-  },
+<div className="card-hover" style={styles.card}>
+<h3>Secure Accounts</h3>
+<p>Your data is protected and private.</p>
+</div>
 
-  footerLinks: {
-    display: "flex",
-    justifyContent: "center",
-    gap: "28px",
-  },
-};
+<div className="card-hover" style={styles.card}>
+<h3>Clean Dashboard</h3>
+<p>All your financial data in one place.</p>
+</div>
 
-export default LandingPage;
+</div>
+
+</section>
+
+
+{/* HOW IT WORKS */}
+
+<section id="how" style={styles.sectionAlt}>
+
+<h2 style={styles.sectionTitle}>How It Works</h2>
+
+<div style={styles.steps}>
+
+<div style={styles.stepCard}>
+<h3>1. Add Contact</h3>
+<p>Add a friend or client.</p>
+</div>
+
+<div style={styles.stepCard}>
+<h3>2. Log Payment</h3>
+<p>Record who paid what.</p>
+</div>
+
+<div style={styles.stepCard}>
+<h3>3. Set Due Date</h3>
+<p>Track repayment deadlines.</p>
+</div>
+
+<div style={styles.stepCard}>
+<h3>4. Settle Up</h3>
+<p>Mark transactions complete.</p>
+</div>
+
+</div>
+
+</section>
+
+
+{/* DASHBOARD */}
+
+<section style={styles.section}>
+
+<h2 style={styles.sectionTitle}>Dashboard Preview</h2>
+
+<div className="dashboard-float" style={styles.dashboard}>
+
+<p>Alex → +$200</p>
+<p>Sam → -$50</p>
+<p>Jordan → +$120</p>
+
+<hr style={{margin:"15px 0"}}/>
+
+<h3>Net Balance: +$270</h3>
+
+</div>
+
+</section>
+
+
+{/* CTA */}
+
+<section style={styles.cta}>
+
+<h2 style={styles.ctaTitle}>
+Start Tracking Your Payments Today
+</h2>
+
+<button
+className="btn-primary"
+style={styles.primaryBtn}
+onClick={()=>navigate("/register")}
+>
+Create Free Account
+</button>
+
+</section>
+
+
+{/* FOOTER */}
+
+<footer style={styles.footer}>
+
+<p>© 2026 PaymentTracker</p>
+
+<div style={styles.footerLinks}>
+<a href="#">Privacy</a>
+<a href="#">Terms</a>
+<a href="#">Contact</a>
+</div>
+
+</footer>
+
+</div>
+
+)
+
+}
+
+const styles={
+
+container:{
+fontFamily:"Outfit, sans-serif",
+background:"#f8faff",
+color:"#0f172a"
+},
+
+nav:{
+display:"flex",
+justifyContent:"space-between",
+alignItems:"center",
+padding:"18px clamp(20px,5vw,70px)",
+background:"#fff",
+position:"sticky",
+top:0,
+zIndex:10
+},
+
+logo:{
+fontFamily:"Playfair Display, serif",
+fontSize:"22px",
+color:"#4f46e5"
+},
+
+navLinks:{
+display:"flex",
+gap:"25px",
+alignItems:"center"
+},
+
+loginBtn:{
+padding:"8px 20px",
+background:"#4f46e5",
+border:"none",
+borderRadius:"8px",
+color:"white",
+cursor:"pointer"
+},
+
+hero:{
+padding:"clamp(100px,12vw,140px) 20px",
+textAlign:"center",
+background:"linear-gradient(135deg,#4f46e5,#7c3aed)",
+color:"white"
+},
+
+title:{
+fontFamily:"Playfair Display, serif",
+fontSize:"clamp(44px,6vw,70px)",
+fontWeight:"900",
+marginBottom:"20px"
+},
+
+titleAccent:{
+fontStyle:"italic",
+color:"#c7d2fe"
+},
+
+subtitle:{
+fontSize:"18px",
+maxWidth:"600px",
+margin:"0 auto 40px",
+lineHeight:"1.7"
+},
+
+heroButtons:{
+display:"flex",
+justifyContent:"center",
+gap:"15px",
+flexWrap:"wrap"
+},
+
+primaryBtn:{
+padding:"14px 30px",
+border:"none",
+background:"#fff",
+color:"#4f46e5",
+borderRadius:"10px",
+fontWeight:"600",
+cursor:"pointer"
+},
+
+secondaryBtn:{
+padding:"14px 30px",
+border:"2px solid white",
+background:"transparent",
+color:"white",
+borderRadius:"10px",
+cursor:"pointer"
+},
+
+section:{
+padding:"90px 20px",
+textAlign:"center"
+},
+
+sectionAlt:{
+padding:"90px 20px",
+background:"#eef2ff",
+textAlign:"center"
+},
+
+sectionTitle:{
+fontFamily:"Playfair Display, serif",
+fontSize:"38px",
+marginBottom:"40px"
+},
+
+grid:{
+display:"grid",
+gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))",
+gap:"20px",
+maxWidth:"1000px",
+margin:"auto"
+},
+
+card:{
+background:"white",
+padding:"30px",
+borderRadius:"12px",
+boxShadow:"0 10px 25px rgba(0,0,0,0.05)"
+},
+
+steps:{
+display:"grid",
+gridTemplateColumns:"repeat(auto-fit,minmax(200px,1fr))",
+gap:"20px",
+maxWidth:"900px",
+margin:"auto"
+},
+
+stepCard:{
+background:"white",
+padding:"25px",
+borderRadius:"10px",
+boxShadow:"0 5px 15px rgba(0,0,0,0.05)"
+},
+
+dashboard:{
+background:"#111827",
+color:"white",
+padding:"30px",
+borderRadius:"14px",
+maxWidth:"420px",
+width:"100%",
+margin:"auto"
+},
+
+cta:{
+padding:"100px 20px",
+textAlign:"center",
+background:"linear-gradient(135deg,#4f46e5,#7c3aed)",
+color:"white"
+},
+
+ctaTitle:{
+fontSize:"38px",
+marginBottom:"30px"
+},
+
+footer:{
+padding:"30px",
+background:"#111827",
+color:"white",
+textAlign:"center"
+},
+
+footerLinks:{
+display:"flex",
+justifyContent:"center",
+gap:"20px",
+marginTop:"10px"
+}
+
+}
+
+export default LandingPage
