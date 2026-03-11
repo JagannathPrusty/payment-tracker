@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react"
 import { addTransaction, updateTransaction } from "../api/transactionApi"
+import { useNavigate } from "react-router-dom"
 
-function TransactionForm({ refresh, editData, setEditData }) {
+function TransactionForm({ editData }) {
+
+const navigate = useNavigate()
 
 const [person,setPerson] = useState("")
 const [amount,setAmount] = useState("")
@@ -13,7 +16,7 @@ const [success,setSuccess] = useState("")
 
 
 /* ==========================
-   EDIT TRANSACTION
+   LOAD EDIT DATA
 ========================== */
 
 useEffect(()=>{
@@ -23,9 +26,9 @@ if(editData){
 setPerson(editData.person)
 setAmount(editData.amount)
 setType(editData.type)
-setDate(editData.date)
+setDate(editData.date?.slice(0,10))
+setDueDate(editData.due_date?.slice(0,10) || "")
 setNote(editData.note || "")
-setDueDate(editData.due_date || "")
 
 }
 
@@ -54,7 +57,6 @@ try{
 if(editData){
 
 await updateTransaction(editData.id,data)
-setEditData(null)
 
 setSuccess("Transaction updated successfully ✅")
 
@@ -66,14 +68,6 @@ setSuccess("Transaction added successfully ✅")
 
 }
 
-refresh()
-
-}catch(err){
-
-console.log(err)
-
-}
-
 setPerson("")
 setAmount("")
 setType("lent")
@@ -82,8 +76,16 @@ setDueDate("")
 setNote("")
 
 setTimeout(()=>{
-setSuccess("")
-},3000)
+
+navigate("/transactions")
+
+},1200)
+
+}catch(err){
+
+console.log(err)
+
+}
 
 }
 
@@ -98,9 +100,8 @@ return(
 
 <h2>{editData ? "Edit Transaction" : "Add Transaction"}</h2>
 
-{/* SUCCESS MESSAGE */}
-
 {success && (
+
 <p style={{
 color:"#22c55e",
 fontWeight:"bold",
@@ -108,12 +109,12 @@ marginBottom:"15px"
 }}>
 {success}
 </p>
+
 )}
 
 <label>Person</label>
 <input
 type="text"
-placeholder="Person"
 value={person}
 onChange={(e)=>setPerson(e.target.value)}
 required
@@ -122,7 +123,6 @@ required
 <label>Amount</label>
 <input
 type="number"
-placeholder="Amount"
 value={amount}
 onChange={(e)=>setAmount(e.target.value)}
 required
@@ -156,7 +156,6 @@ required
 <label>Note</label>
 <input
 type="text"
-placeholder="Note"
 value={note}
 onChange={(e)=>setNote(e.target.value)}
 />

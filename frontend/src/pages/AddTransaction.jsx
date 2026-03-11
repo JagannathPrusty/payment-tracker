@@ -1,53 +1,16 @@
-// import { useNavigate } from "react-router-dom"
-// import TransactionForm from "../components/TransactionForm"
-
-// function AddTransaction(){
-
-// const navigate = useNavigate()
-
-// return(
-
-// <div className="container">
-
-// <button
-// onClick={()=>navigate("/dashboard")}
-// style={{
-// marginBottom:"20px",
-// padding:"10px 18px",
-// background:"#d4af37",
-// border:"none",
-// borderRadius:"8px",
-// cursor:"pointer",
-// fontWeight:"bold"
-// }}
-// >
-// ← Back
-// </button>
-
-// <h2>Add New Transaction</h2>
-
-// <TransactionForm/>
-
-// </div>
-
-// )
-
-// }
-
-// export default AddTransaction
-
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import TransactionForm from "../components/TransactionForm"
 
 function AddTransaction(){
 
 const navigate = useNavigate()
+const location = useLocation()
+
+const editData = location.state || null
 
 return(
 
 <div className="container">
-
-{/* Top Buttons */}
 
 <div style={{
 display:"flex",
@@ -86,9 +49,11 @@ View Transactions
 
 </div>
 
-<h2>Add New Transaction</h2>
+<h2>
+{editData ? "Edit Transaction" : "Add New Transaction"}
+</h2>
 
-<TransactionForm/>
+<TransactionForm editData={editData}/>
 
 </div>
 
