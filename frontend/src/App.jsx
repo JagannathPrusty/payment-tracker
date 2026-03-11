@@ -36,7 +36,8 @@ import Hero from "./pages/Hero"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
-
+import AddTransaction from "./pages/AddTransaction"
+import Transactions from "./pages/Transactions"
 
 
 
@@ -57,6 +58,9 @@ return(
 <Route path="/register" element={<Register/>} />
 
 <Route path="/dashboard" element={token ? <Home/> : <Login/>} />
+
+<Route path="/add-transaction" element={<AddTransaction/>}/>
+<Route path="/transactions" element={<Transactions/>}/>
 
 
 </Routes>

@@ -40,3 +40,72 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Page Header */
+
+.page-header{
+display:flex;
+justify-content:space-between;
+margin-bottom:20px;
+}
+
+/* Page Title */
+
+.page-title{
+margin-bottom:20px;
+font-size:24px;
+font-weight:bold;
+}
+
+/* Back Button */
+
+.back-btn{
+padding:10px 18px;
+background:#d4af37;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+color:black;
+transition:0.3s;
+}
+
+.back-btn:hover{
+transform:scale(1.05);
+}
+
+/* View Button */
+
+.view-btn{
+padding:10px 18px;
+background:#22c55e;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+color:white;
+transition:0.3s;
+}
+
+.view-btn:hover{
+transform:scale(1.05);
+}
+
+/* Form Container */
+
+.form-box{
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Transaction Container */
+
+.transaction-box{
+margin-top:20px;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}

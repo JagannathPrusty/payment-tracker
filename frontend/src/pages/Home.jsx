@@ -168,48 +168,6 @@ Your money, beautifully visualised
 </section>
 
 
-{/* ===============================
-   FORM
-================================ */}
-
-<section className="middle-section anim-block" style={{animationDelay:"0.2s"}}>
-
-<TransactionForm
-refresh={loadData}
-editData={editData}
-setEditData={setEditData}
-/>
-
-</section>
-
-
-
-
-{/* ===============================
-   TRANSACTION LIST
-================================ */}
-
-<section className="anim-block" style={{animationDelay:"0.3s"}}>
-
-<div className="list-header">
-
-<h2 className="section-title">
-Transaction History
-</h2>
-
-<span className="count-badge">
-{transactions.length}
-</span>
-
-</div>
-
-<TransactionList
-transactions={transactions}
-refresh={loadData}
-setEditData={setEditData}
-/>
-
-</section>
 
 
 </div>

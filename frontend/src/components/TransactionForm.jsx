@@ -1,104 +1,3 @@
-// import { useState,useEffect } from "react"
-// import { addTransaction,updateTransaction } from "../api/transactionApi"
-
-// function TransactionForm({ refresh, editData, setEditData }) {
-
-// const [person,setPerson] = useState("")
-// const [amount,setAmount] = useState("")
-// const [type,setType] = useState("lent")
-// const [date,setDate] = useState("")
-// const [note,setNote] = useState("")
-
-// useEffect(()=>{
-// if(editData){
-
-// setPerson(editData.person)
-// setAmount(editData.amount)
-// setType(editData.type)
-// setDate(editData.date)
-// setNote(editData.note || "")
-
-// }
-// },[editData])
-
-
-// const handleSubmit = async(e)=>{
-
-// e.preventDefault()
-
-// const data = {person,amount,type,date,note}
-
-// if(editData){
-
-// await updateTransaction(editData.id,data)
-// setEditData(null)
-
-// }else{
-
-// await addTransaction(data)
-
-// }
-
-// setPerson("")
-// setAmount("")
-// setDate("")
-// setNote("")
-
-// refresh()
-
-// }
-
-// return(
-
-// <form onSubmit={handleSubmit}>
-
-// <h2>{editData ? "Edit Transaction" : "Add Transaction"}</h2>
-
-// <input
-// placeholder="Person"
-// value={person}
-// onChange={(e)=>setPerson(e.target.value)}
-// required
-// />
-
-// <input
-// type="number"
-// placeholder="Amount"
-// value={amount}
-// onChange={(e)=>setAmount(e.target.value)}
-// required
-// />
-
-// <select value={type} onChange={(e)=>setType(e.target.value)}>
-// <option value="lent">I Gave</option>
-// <option value="borrowed">I Borrowed</option>
-// </select>
-
-// <input
-// type="datetime-local"
-// value={date}
-// onChange={(e)=>setDate(e.target.value)}
-// required
-// />
-
-// <input
-// placeholder="Note"
-// value={note}
-// onChange={(e)=>setNote(e.target.value)}
-// />
-
-// <button type="submit">
-// {editData ? "Update" : "Add"}
-// </button>
-
-// </form>
-
-// )
-
-// }
-
-// export default TransactionForm
-
 import { useState, useEffect } from "react"
 import { addTransaction, updateTransaction } from "../api/transactionApi"
 
@@ -110,6 +9,7 @@ const [type,setType] = useState("lent")
 const [date,setDate] = useState("")
 const [dueDate,setDueDate] = useState("")
 const [note,setNote] = useState("")
+const [success,setSuccess] = useState("")
 
 
 /* ==========================
@@ -124,7 +24,7 @@ setPerson(editData.person)
 setAmount(editData.amount)
 setType(editData.type)
 setDate(editData.date)
-setNote(editData.note)
+setNote(editData.note || "")
 setDueDate(editData.due_date || "")
 
 }
@@ -156,9 +56,13 @@ if(editData){
 await updateTransaction(editData.id,data)
 setEditData(null)
 
+setSuccess("Transaction updated successfully ✅")
+
 }else{
 
 await addTransaction(data)
+
+setSuccess("Transaction added successfully ✅")
 
 }
 
@@ -177,6 +81,10 @@ setDate("")
 setDueDate("")
 setNote("")
 
+setTimeout(()=>{
+setSuccess("")
+},3000)
+
 }
 
 
@@ -188,7 +96,19 @@ return(
 
 <form onSubmit={handleSubmit}>
 
-<h2>Add Transaction</h2>
+<h2>{editData ? "Edit Transaction" : "Add Transaction"}</h2>
+
+{/* SUCCESS MESSAGE */}
+
+{success && (
+<p style={{
+color:"#22c55e",
+fontWeight:"bold",
+marginBottom:"15px"
+}}>
+{success}
+</p>
+)}
 
 <label>Person</label>
 <input
@@ -224,8 +144,6 @@ value={date}
 onChange={(e)=>setDate(e.target.value)}
 required
 />
-
-{/* 🔴 DUE DATE INPUT */}
 
 <label>Due Date</label>
 <input

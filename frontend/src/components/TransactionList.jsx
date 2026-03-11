@@ -34,7 +34,7 @@ onChange={(e)=>setSearch(e.target.value)}
 <strong>{t.person}</strong>
 <p>₹{t.amount}</p>
 <p>{t.type}</p>
-<p>{new Date(t.date).toLocaleString()}</p>
+<p>{new Date(t.date).toLocaleDateString()}</p>
 <p>{t.note}</p>
 </div>
 

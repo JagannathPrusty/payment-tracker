@@ -130,9 +130,9 @@ className={`nav-links ${menuOpen ? "show" : ""}`}
 
 >
 
-<a href="#features">Features</a>&nbsp; &nbsp;&nbsp; &nbsp;
+<a href="#features">Features</a>&nbsp; &nbsp;
 
-<a href="#how">How It Works</a>&nbsp; &nbsp;&nbsp; &nbsp;
+<a href="#how">How It Works</a>&nbsp; &nbsp;
 
 <button
 className="login-btn"
