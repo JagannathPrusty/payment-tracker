@@ -1,8 +1,13 @@
-// import { BrowserRouter,Routes,Route } from "react-router-dom"
+// import { BrowserRouter, Routes, Route } from "react-router-dom"
 
+// import Hero from "./pages/Hero"
 // import Home from "./pages/Home"
 // import Login from "./pages/Login"
 // import Register from "./pages/Register"
+// import AddTransaction from "./pages/AddTransaction"
+// import Transactions from "./pages/Transactions"
+// import InstallButton from "./components/InstallButton";
+
 
 // function App(){
 
@@ -14,11 +19,17 @@
 
 // <Routes>
 
-// <Route path="/" element={token ? <Home/> : <Login/>}/>
+// <Route path="/" element={<Hero/>} />
 
-// <Route path="/login" element={<Login/>}/>
+// <Route path="/login" element={token ? <Home/> : <Login/>} />
 
-// <Route path="/register" element={<Register/>}/>
+// <Route path="/register" element={<Register/>} />
+
+// <Route path="/dashboard" element={token ? <Home/> : <Login/>} />
+
+// <Route path="/add-transaction" element={<AddTransaction/>}/>
+// <Route path="/transactions" element={<Transactions/>}/>
+
 
 // </Routes>
 
@@ -30,45 +41,42 @@
 
 // export default App
 
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Hero from "./pages/Hero"
-import Home from "./pages/Home"
-import Login from "./pages/Login"
-import Register from "./pages/Register"
-import AddTransaction from "./pages/AddTransaction"
-import Transactions from "./pages/Transactions"
+import Hero from "./pages/Hero";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import AddTransaction from "./pages/AddTransaction";
+import Transactions from "./pages/Transactions";
 
+import InstallButton from "./components/InstallButton";
 
+function App() {
+  const token = localStorage.getItem("token");
 
-function App(){
+  return (
+    <BrowserRouter>
 
-const token = localStorage.getItem("token")
+      {/* Install App Button */}
+      <InstallButton />
 
-return(
+      <Routes>
+        <Route path="/" element={<Hero />} />
 
-<BrowserRouter>
+        <Route path="/login" element={token ? <Home /> : <Login />} />
 
-<Routes>
+        <Route path="/register" element={<Register />} />
 
-<Route path="/" element={<Hero/>} />
+        <Route path="/dashboard" element={token ? <Home /> : <Login />} />
 
-<Route path="/login" element={token ? <Home/> : <Login/>} />
+        <Route path="/add-transaction" element={<AddTransaction />} />
 
-<Route path="/register" element={<Register/>} />
+        <Route path="/transactions" element={<Transactions />} />
+      </Routes>
 
-<Route path="/dashboard" element={token ? <Home/> : <Login/>} />
-
-<Route path="/add-transaction" element={<AddTransaction/>}/>
-<Route path="/transactions" element={<Transactions/>}/>
-
-
-</Routes>
-
-</BrowserRouter>
-
-)
-
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

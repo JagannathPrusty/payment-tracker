@@ -929,3 +929,50 @@ border-radius:14px;
 margin-bottom:18px;
 }
 
+.filter-box{
+display:flex;
+align-items:center;
+gap:10px;
+position:relative;
+margin-bottom:20px;
+}
+
+.filter-box input,
+.filter-box select{
+flex:1;
+padding:12px;
+border-radius:8px;
+border:1px solid #444;
+background:#111;
+color:white;
+}
+
+.filter-icon{
+cursor:pointer;
+padding:10px;
+background:#d4af37;
+border-radius:8px;
+font-size:18px;
+}
+
+.filter-menu{
+position:absolute;
+right:0;
+top:50px;
+background:#1a1a1a;
+border-radius:10px;
+box-shadow:0 5px 20px rgba(0,0,0,0.5);
+padding:10px;
+width:160px;
+z-index: 9999;
+}
+
+.filter-menu p{
+padding:8px;
+cursor:pointer;
+}
+
+.filter-menu p:hover{
+background:#333;
+border-radius:5px;
+}

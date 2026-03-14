@@ -168,31 +168,14 @@ onClick={()=>navigate("/dashboard")}
 
 {/* SEARCH SECTION */}
 
-<div className="search-box">
 
-<input
-type="date"
-value={searchDate}
-onChange={(e)=>setSearchDate(e.target.value)}
-/>
-
-<select
-value={searchType}
-onChange={(e)=>setSearchType(e.target.value)}
->
-
-<option value="">All Types</option>
-<option value="lent">Money Given</option>
-<option value="borrowed">Money Borrowed</option>
-
-</select>
-
-</div>
 
 
 <span className="count-badge">
 {filtered.length}
-</span>
+</span> 
+Transactions 
+
 
 
 <TransactionList

@@ -123,6 +123,7 @@ padding:70px 20px !important;
 
 <nav style={styles.nav}>
 
+
 <h2 style={styles.logo}>PaymentTracker</h2>
 
 <div
