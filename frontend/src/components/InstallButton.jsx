@@ -132,8 +132,8 @@ function InstallButton() {
   return (
     <div style={popupStyle}>
       <div style={boxStyle}>
-        <h3>Install Budget Tracker</h3>
-        <p color="black">Add this app to your device for a better experience.</p>
+        <h3 style={{ color: "black" }}>Install Budget Tracker</h3>
+        <p style={{ color: "black" }}>Add this app to your device for a better experience.</p>
 
         <button onClick={installApp} style={installBtn}>
           Install
@@ -165,12 +165,13 @@ const boxStyle = {
   padding: "30px",
   borderRadius: "10px",
   textAlign: "center"
+  
 };
 
 const installBtn = {
   padding: "10px 20px",
   margin: "10px",
-  background: "#d4af37",
+  background: "#e9b50a",
   border: "none",
   color: "white",
   cursor: "pointer"
@@ -179,7 +180,7 @@ const installBtn = {
 const cancelBtn = {
   padding: "10px 20px",
   margin: "10px",
-  background: "gray",
+  background: "#c54740",
   border: "none",
   color: "white",
   cursor: "pointer"

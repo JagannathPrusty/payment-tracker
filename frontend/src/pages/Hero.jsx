@@ -126,25 +126,17 @@ padding:70px 20px !important;
 
 <h2 style={styles.logo}>PaymentTracker</h2>
 
-<div
-className={`nav-links ${menuOpen ? "show" : ""}`}
+<div className={`nav-links ${menuOpen ? "show" : ""}`}>
+  <a href="#features">Features</a>
+  <a href="#how">How It Works</a>
 
->
-
-<a href="#features">Features</a>&nbsp; &nbsp;
-
-<a href="#how">How It Works</a>&nbsp; &nbsp;
-
-<button
-className="login-btn"
-style={styles.loginBtn}
-onClick={()=>navigate("/login")}
->
-Login
-</button>
-
+  <button
+    className="login-btn"
+    onClick={() => navigate("/login")}
+  >
+    Login
+  </button>
 </div>
-
 <div
 className="hamburger"
 onClick={()=>setMenuOpen(!menuOpen)}
