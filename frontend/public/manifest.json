@@ -1,6 +1,6 @@
 {
-  "name": "Budget Tracker",
-  "short_name": "Budget",
+  "name": "My Budget Tracker",
+  "short_name": "Money Manager",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0f1c",
