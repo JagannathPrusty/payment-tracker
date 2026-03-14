@@ -133,7 +133,7 @@ function InstallButton() {
     <div style={popupStyle}>
       <div style={boxStyle}>
         <h3>Install Budget Tracker</h3>
-        <p>Add this app to your device for a better experience.</p>
+        <p color="black">Add this app to your device for a better experience.</p>
 
         <button onClick={installApp} style={installBtn}>
           Install
@@ -184,5 +184,6 @@ const cancelBtn = {
   color: "white",
   cursor: "pointer"
 };
+
 
 export default InstallButton;
