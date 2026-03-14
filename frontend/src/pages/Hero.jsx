@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
+import { FaGithub, FaLinkedin, FaGlobe } from "react-icons/fa";
 
 function LandingPage() {
 
@@ -124,7 +125,7 @@ padding:70px 20px !important;
 <nav style={styles.nav}>
 
 
-<h2 style={styles.logo}>PaymentTracker</h2>
+<h2 style={styles.logo}>Money Manager</h2>
 
 <div className={`nav-links ${menuOpen ? "show" : ""}`}>
   <a href="#features">Features</a>
@@ -297,13 +298,29 @@ Create Free Account
 
 <footer style={styles.footer}>
 
-<p>© 2026 PaymentTracker</p>
+  <p>© 2026 PaymentTracker</p>
 
-<div style={styles.footerLinks}>
-<a href="#">Privacy</a>
-<a href="#">Terms</a>
-<a href="#">Contact</a>
-</div>
+  
+
+  <div style={styles.developer}>
+    <p>
+      Developed by <strong>Jagannath Prusty</strong>
+    </p>
+
+    <div style={styles.icons}>
+      <a href="https://jagannathprusty.vercel.app/" target="_blank" rel="noreferrer">
+        <FaGlobe />
+      </a>
+
+      <a href="https://github.com/JagannathPrusty" target="_blank" rel="noreferrer">
+        <FaGithub />
+      </a>
+
+      <a href="https://linkedin.com/in/jagannath-prusty-25286132a" target="_blank" rel="noreferrer">
+        <FaLinkedin />
+      </a>
+    </div>
+  </div>
 
 </footer>
 
@@ -486,6 +503,19 @@ display:"flex",
 justifyContent:"center",
 gap:"20px",
 marginTop:"10px"
+},
+
+
+developer: {
+  marginTop: "15px"
+},
+
+icons: {
+  display: "flex",
+  justifyContent: "center",
+  gap: "15px",
+  fontSize: "22px",
+  marginTop: "5px"
 }
 
 }
