@@ -91,6 +91,104 @@
 
 // export default InstallButton;
 
+// import { useEffect, useState } from "react";
+
+// function InstallButton() {
+//   const [deferredPrompt, setDeferredPrompt] = useState(null);
+//   const [showPopup, setShowPopup] = useState(false);
+
+//   useEffect(() => {
+//     const handler = (e) => {
+//       e.preventDefault();
+//       setDeferredPrompt(e);
+//       setShowPopup(true); // show popup when install available
+//     };
+
+//     window.addEventListener("beforeinstallprompt", handler);
+
+//     return () => window.removeEventListener("beforeinstallprompt", handler);
+//   }, []);
+
+//   const installApp = async () => {
+//     if (!deferredPrompt) return;
+
+//     deferredPrompt.prompt();
+
+//     const { outcome } = await deferredPrompt.userChoice;
+
+//     if (outcome === "accepted") {
+//       console.log("App installed");
+//     }
+
+//     setShowPopup(false);
+//   };
+
+//   const cancelPopup = () => {
+//     setShowPopup(false); // hide only for this session
+//   };
+
+//   if (!showPopup) return null;
+
+//   return (
+//     <div style={popupStyle}>
+//       <div style={boxStyle}>
+//         <h3 style={{ color: "black" }}>Install Budget Tracker</h3>
+//         <p style={{ color: "black" }}>Add this app to your device for a better experience.</p>
+
+//         <button onClick={installApp} style={installBtn}>
+//           Install
+//         </button>
+
+//         <button onClick={cancelPopup} style={cancelBtn}>
+//           Cancel
+//         </button>
+//       </div>
+//     </div>
+//   );
+// }
+
+// const popupStyle = {
+//   position: "fixed",
+//   top: 0,
+//   left: 0,
+//   width: "100%",
+//   height: "100%",
+//   background: "rgba(0,0,0,0.6)",
+//   display: "flex",
+//   justifyContent: "center",
+//   alignItems: "center",
+//   zIndex: 999
+// };
+
+// const boxStyle = {
+//   background: "white",
+//   padding: "30px",
+//   borderRadius: "10px",
+//   textAlign: "center"
+  
+// };
+
+// const installBtn = {
+//   padding: "10px 20px",
+//   margin: "10px",
+//   background: "#e9b50a",
+//   border: "none",
+//   color: "white",
+//   cursor: "pointer"
+// };
+
+// const cancelBtn = {
+//   padding: "10px 20px",
+//   margin: "10px",
+//   background: "#c54740",
+//   border: "none",
+//   color: "white",
+//   cursor: "pointer"
+// };
+
+
+// export default InstallButton;
+
 import { useEffect, useState } from "react";
 
 function InstallButton() {
@@ -98,15 +196,23 @@ function InstallButton() {
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
+
+    // prevent popup from showing multiple times in same session
+    if (sessionStorage.getItem("installPopupShown")) return;
+
     const handler = (e) => {
       e.preventDefault();
+
       setDeferredPrompt(e);
-      setShowPopup(true); // show popup when install available
+      setShowPopup(true);
+
+      sessionStorage.setItem("installPopupShown", "true");
     };
 
     window.addEventListener("beforeinstallprompt", handler);
 
     return () => window.removeEventListener("beforeinstallprompt", handler);
+
   }, []);
 
   const installApp = async () => {
@@ -124,7 +230,7 @@ function InstallButton() {
   };
 
   const cancelPopup = () => {
-    setShowPopup(false); // hide only for this session
+    setShowPopup(false);
   };
 
   if (!showPopup) return null;
@@ -133,7 +239,9 @@ function InstallButton() {
     <div style={popupStyle}>
       <div style={boxStyle}>
         <h3 style={{ color: "black" }}>Install Budget Tracker</h3>
-        <p style={{ color: "black" }}>Add this app to your device for a better experience.</p>
+        <p style={{ color: "black" }}>
+          Add this app to your device for a better experience.
+        </p>
 
         <button onClick={installApp} style={installBtn}>
           Install
@@ -165,7 +273,6 @@ const boxStyle = {
   padding: "30px",
   borderRadius: "10px",
   textAlign: "center"
-  
 };
 
 const installBtn = {
@@ -185,6 +292,5 @@ const cancelBtn = {
   color: "white",
   cursor: "pointer"
 };
-
 
 export default InstallButton;
