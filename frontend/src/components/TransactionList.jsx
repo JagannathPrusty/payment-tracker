@@ -98,7 +98,7 @@ onChange={(e)=>setSearch(e.target.value)}
 
 <div className="filter-menu">
 
-<p onClick={()=>{setFilterType("name");setShowMenu(false)}}>Filter by Name</p>
+<p style={{ color: "white" }} onClick={()=>{setFilterType("name");setShowMenu(false)}}>Filter by Name</p>
 
 <p onClick={()=>{setFilterType("date");setShowMenu(false)}}>Filter by Date</p>
 
