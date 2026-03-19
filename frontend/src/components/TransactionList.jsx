@@ -135,7 +135,7 @@ onChange={(e)=>setSearch(e.target.value)}
 <div>
 
 <button
-onClick={()=>navigate("/add",{state:t})}
+onClick={()=>navigate("/add-transaction",{state:t})}
 >
 Edit
 </button>
