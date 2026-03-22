@@ -5,95 +5,121 @@ const jwt = require("jsonwebtoken")
 /* ==============================
    REGISTER USER
 ============================== */
+
 exports.register = async (req, res) => {
-  const { name, email, password, phone } = req.body;
 
-  try {
-    const hashedPassword = await bcrypt.hash(password, 10);
+const { name, email, password, phone } = req.body
 
-    await db.query(
-      "INSERT INTO users (name,email,password,phone) VALUES ($1,$2,$3,$4)",
-      [name, email, hashedPassword, phone]
-    );
+try {
 
-    res.json({ message: "User registered successfully" });
+const hashedPassword = await bcrypt.hash(password, 10)
 
-  } catch (err) {
-    console.log("REGISTER ERROR:", err);
+db.query(
+"INSERT INTO users (name,email,password,phone) VALUES (?,?,?,?)",
+[name, email, hashedPassword, phone],
+(err, result) => {
 
-    // 👇 HANDLE DUPLICATE EMAIL
-    if (err.code === "23505") {
-      return res.status(400).json({ message: "Email already exists" });
-    }
+if (err) {
+console.log("REGISTER ERROR:", err)
+return res.status(500).json({ message: "Registration failed" })
+}
 
-    res.status(500).json({ message: "Registration failed" });
-  }
-};
+res.json({ message: "User registered successfully" })
+
+})
+
+} catch (error) {
+
+console.log(error)
+res.status(500).json({ message: "Server error" })
+
+}
+
+}
+
+
 
 /* ==============================
    LOGIN USER
 ============================== */
 
-exports.login = async (req, res) => {
-  const { email, password } = req.body;
+exports.login = (req, res) => {
 
-  try {
-    const result = await db.query(
-      "SELECT * FROM users WHERE email=$1",
-      [email]
-    );
+const { email, password } = req.body
 
-    if (result.rows.length === 0) {
-      return res.status(400).json({ message: "User not found" });
-    }
+db.query(
+"SELECT * FROM users WHERE email=?",
+[email],
+async (err, result) => {
 
-    const user = result.rows[0];
+if (err) {
+console.log(err)
+return res.status(500).json({ message: "Database error" })
+}
 
-    const validPassword = await bcrypt.compare(password, user.password);
+if (result.length === 0) {
+return res.status(400).json({ message: "User not found" })
+}
 
-    if (!validPassword) {
-      return res.status(401).json({ message: "Invalid password" });
-    }
+const user = result[0]
 
-    const token = jwt.sign(
-      { id: user.id },
-      "secretkey",
-      { expiresIn: "1d" }
-    );
+try {
 
-    res.json({
-      token,
-      user: {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        phone: user.phone,
-      },
-    });
+const validPassword = await bcrypt.compare(password, user.password)
 
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ message: "Database error" });
-  }
-};
+if (!validPassword) {
+return res.status(401).json({ message: "Invalid password" })
+}
+
+const token = jwt.sign(
+{ id: user.id },
+"secretkey",
+{ expiresIn: "1d" }
+)
+
+res.json({
+token,
+user: {
+id: user.id,
+name: user.name,
+email: user.email,
+phone: user.phone
+}
+})
+
+} catch (error) {
+
+console.log(error)
+return res.status(500).json({ message: "Login error" })
+
+}
+
+})
+
+}
+
+
 
 /* ==============================
    UPDATE PHONE NUMBER
 ============================== */
-exports.updatePhone = async (req, res) => {
-  const userId = req.userId;
-  const { phone } = req.body;
+exports.updatePhone = (req, res) => {
 
-  try {
-    await db.query(
-      "UPDATE users SET phone=$1 WHERE id=$2",
-      [phone, userId]
-    );
+const userId = req.userId
+const { phone } = req.body
 
-    res.json({ message: "Phone number updated successfully" });
+db.query(
+"UPDATE users SET phone=? WHERE id=?",
+[phone, userId],
+(err, result) => {
 
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ message: "Failed to update phone" });
-  }
-};
+if (err) {
+console.log(err)
+return res.status(500).json({ message: "Failed to update phone" })
+}
+
+res.json({ message: "Phone number updated successfully" })
+
+})
+
+}
