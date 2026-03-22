@@ -118,117 +118,104 @@ const db = require("../db")
 /* ==============================
    GET USER TRANSACTIONS
 ============================== */
+exports.getTransactions = async (req, res) => {
+  const userId = req.userId;
 
-exports.getTransactions = (req, res) => {
+  try {
+    const result = await db.query(
+      "SELECT * FROM transactions WHERE user_id=$1 ORDER BY date DESC",
+      [userId]
+    );
 
-const userId = req.userId
+    res.json(result.rows);
 
-db.query(
-"SELECT * FROM transactions WHERE user_id=? ORDER BY date DESC",
-[userId],
-(err, result) => {
-
-if(err) return res.status(500).json(err)
-
-res.json(result)
-
-})
-
-}
-
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
 
 /* ==============================
    CREATE TRANSACTION
 ============================== */
 
-exports.createTransaction = (req, res) => {
+exports.createTransaction = async (req, res) => {
+  const userId = req.userId;
+  const { person, type, amount, date, note, due_date } = req.body;
 
-const userId = req.userId
+  try {
+    await db.query(
+      "INSERT INTO transactions (person,type,amount,date,note,due_date,user_id) VALUES ($1,$2,$3,$4,$5,$6,$7)",
+      [person, type, amount, date, note, due_date, userId]
+    );
 
-const { person, type, amount, date, note, due_date } = req.body
+    res.json({ message: "Transaction added successfully" });
 
-db.query(
-"INSERT INTO transactions (person,type,amount,date,note,due_date,user_id) VALUES (?,?,?,?,?,?,?)",
-[person, type, amount, date, note, due_date, userId],
-(err, result) => {
-
-if(err) return res.status(500).json(err)
-
-res.json({ message: "Transaction added successfully" })
-
-})
-
-}
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
 
 
 /* ==============================
    UPDATE TRANSACTION
 ============================== */
+exports.updateTransaction = async (req, res) => {
+  const userId = req.userId;
+  const id = req.params.id;
 
-exports.updateTransaction = (req, res) => {
+  const { person, type, amount, date, note, due_date } = req.body;
 
-const userId = req.userId
-const id = req.params.id
+  try {
+    await db.query(
+      "UPDATE transactions SET person=$1, type=$2, amount=$3, date=$4, note=$5, due_date=$6 WHERE id=$7 AND user_id=$8",
+      [person, type, amount, date, note, due_date, id, userId]
+    );
 
-const { person, type, amount, date, note, due_date } = req.body
+    res.json({ message: "Transaction updated successfully" });
 
-db.query(
-"UPDATE transactions SET person=?, type=?, amount=?, date=?, note=?, due_date=? WHERE id=? AND user_id=?",
-[person, type, amount, date, note, due_date, id, userId],
-(err, result) => {
-
-if(err) return res.status(500).json(err)
-
-res.json({ message: "Transaction updated successfully" })
-
-})
-
-}
-
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
 
 /* ==============================
    DELETE TRANSACTION
 ============================== */
+exports.deleteTransaction = async (req, res) => {
+  const userId = req.userId;
+  const id = req.params.id;
 
-exports.deleteTransaction = (req, res) => {
+  try {
+    await db.query(
+      "DELETE FROM transactions WHERE id=$1 AND user_id=$2",
+      [id, userId]
+    );
 
-const userId = req.userId
-const id = req.params.id
+    res.json({ message: "Transaction deleted successfully" });
 
-db.query(
-"DELETE FROM transactions WHERE id=? AND user_id=?",
-[id, userId],
-(err, result) => {
-
-if(err) return res.status(500).json(err)
-
-res.json({ message: "Transaction deleted successfully" })
-
-})
-
-}
-
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
 
 /* ==============================
    GET NOTIFICATIONS
 ============================== */
+exports.getNotifications = async (req, res) => {
+  const userId = req.userId;
 
-exports.getNotifications = (req, res) => {
+  try {
+    const result = await db.query(
+      `SELECT person, amount, due_date
+       FROM transactions
+       WHERE user_id=$1 AND due_date <= CURRENT_DATE
+       ORDER BY due_date ASC`,
+      [userId]
+    );
 
-const userId = req.userId
+    res.json(result.rows);
 
-db.query(
-`SELECT person, amount, due_date
-FROM transactions
-WHERE user_id=? AND due_date <= CURDATE()
-ORDER BY due_date ASC`,
-[userId],
-(err, result) => {
-
-if(err) return res.status(500).json(err)
-
-res.json(result)
-
-})
-
-}
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
